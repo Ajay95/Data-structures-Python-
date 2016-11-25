@@ -53,4 +53,8 @@ class linkedlist:
                 self.head=current.get_next()
             else:
                 previous.set_next(current.get_next())
-            
+        def contents(self):
+            current=self.head
+            while current:
+               print(current.get_data())
+               current=current.get_next()
