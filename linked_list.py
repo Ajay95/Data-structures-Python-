@@ -1,60 +1,42 @@
-class Node:
-    def __init__(self,value):
-        self.data=value
-        self.next=None
-    def get_data(self):
-        return self.data
+class Node():
+    def __init__(self,new_node,data):
+        self.data=data
+        self.next=new_node
     def get_next(self):
         return self.next
-    def set_next(self,value):
-        self.next=value
-        
-class linkedlist:
-        def __init__(self):
-            self.head=None
-        def insert(self, value):
-            new_node = Node(value)
-            new_node.set_next(self.head)
-            self.head = new_node
-                
-        def size(self):
-            current=self.head
-            count=0
-            while current:
-                count+=1
-                current=current.get_next()
-            return count
-        def search(self,value):
-            current=self.head
-            count=0
-            found=False
-            while current:
-                if current.data==value:
-                    found=True
-                    return {'Found at position':count,'found':found}
+    def get_value(self):
+        return self.data
+    def set_next(self,node):
+        self.next=node
+class linked():
+    def __init__(self):
+        self.head=None
+        self.count=0
+    def insert(self,data):
+        new_node=Node(self.head,data)
+        self.head=new_node
+        self.count+=1
+    def show(self):
+        current=self.head
+        while current:
+            print(current.data)
+            current=current.next
+        print('number of nodes {}'.format(self.count))    
+    def delete(self,data):
+        current=self.head
+        previous=None
+        while current:
+            if current.data==data:
+                if previous:
+                    previous.set_next(current.next)
                 else:
-                    current=current.get_next()
-            if found==False:
-                return('No such value in the node')
-            
-        def delete(self,value):
-            current=self.head
-            count=0
-            found=False
-            while current and found is False:
-                if current.get_data()==value:
-                    found=True
-                else:
-                    previous=current
-                    current=current.get_next()
-            if current is None:
-                return "data is not in list"
-            if previous is None:
-                self.head=current.get_next()
+                    self.head=current.next
+                self.count-=1
+                return('Removed {} from the list'.format(data))
             else:
-                previous.set_next(current.get_next())
-        def contents(self):
-            current=self.head
-            while current:
-               print(current.get_data())
-               current=current.get_next()
+                previous=current
+                current=current.next
+        return "No such data"
+    
+            
+    
